@@ -33,6 +33,11 @@ func NewFileSyncManager(filename string, remotePath string, remotePathPermission
 }
 
 func (fs *FileSyncManager) SyncFile(filename string) error {
+	fmt.Printf("start sync file:%v\n", filename)
+	defer func() {
+		fmt.Printf("sync file: %s done\n", filename)
+	}()
+
 	var (
 		clientConfig ssh.ClientConfig
 		err          error
@@ -53,13 +58,16 @@ func (fs *FileSyncManager) SyncFile(filename string) error {
 	if err = client.Connect(); err != nil {
 		return fmt.Errorf("Couldn't establisch a connection to the remote server ", err)
 	}
-	defer client.Close()
 
 	//open sync file
 	var f *os.File
 	if f, err = os.Open(fs.filename); err != nil {
 		return err
 	}
+	// Close client connection after the file has been copied
+	defer client.Close()
+
+	// Close the file after it has been copied
 	defer f.Close()
 
 	//finaly, copy the file over
