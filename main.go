@@ -52,7 +52,6 @@ func main() {
 		return
 	}
 	defer watcher.Close()
-	fmt.Println(filename)
 
 	err = watcher.Add(filename)
 	if err != nil {
