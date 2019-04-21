@@ -23,11 +23,12 @@ type FileSyncManager struct {
 	sshConfig            SSHConfig
 }
 
-func NewFileSyncManager(filename string, config SSHConfig) *FileSyncManager {
+func NewFileSyncManager(filename string, remotePath string, remotePathPermission string, config SSHConfig) *FileSyncManager {
 	return &FileSyncManager{
-		filename: filename,
-
-		sshConfig: config,
+		filename:             filename,
+		remotePath:           remotePath,
+		remotePathPermission: remotePathPermission,
+		sshConfig:            config,
 	}
 }
 

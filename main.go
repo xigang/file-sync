@@ -43,7 +43,7 @@ func main() {
 		sshKey:   sshKey,
 		hostname: hostname,
 	}
-	fileSyncManager := NewFileSyncManager(filename, config)
+	fileSyncManager := NewFileSyncManager(filename, remotePath, remotePathPermission, config)
 
 	var watcher *fsnotify.Watcher
 	watcher, err = fsnotify.NewWatcher()
