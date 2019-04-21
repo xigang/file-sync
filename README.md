@@ -14,7 +14,11 @@ Move file-sync binary to your `PATH`
 ## Example
 
 ```
-$ file-sync -username=<username> -ssh-key=<ssh_host_rsa_key> -hostname=<remote-hostname> -filename=<watch-local-filename> -remote-path=<remote-server-filename>
+$ file-sync -username=<username> 			\
+			-ssh-key=<ssh_host_rsa_key> 	\
+			-hostname=<remote-hostname>		 \
+			-filename=<watch-local-filename> \
+			-remote-path=<remote-server-filename>
 ```
 
 ## License
