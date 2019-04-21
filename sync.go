@@ -50,27 +50,21 @@ func (fs *FileSyncManager) SyncFile(filename string) error {
 		return fmt.Errorf("params invalid")
 	}
 
-	//create a new SCP client
 	remoteSSHDAddr := fmt.Sprintf("%s:22", fs.sshConfig.hostname)
 	client := scp.NewClient(remoteSSHDAddr, &clientConfig)
 
-	//connect to the remote server
 	if err = client.Connect(); err != nil {
 		return fmt.Errorf("Couldn't establisch a connection to the remote server ", err)
 	}
 
-	//open sync file
 	var f *os.File
 	if f, err = os.Open(fs.filename); err != nil {
 		return err
 	}
-	// Close client connection after the file has been copied
 	defer client.Close()
 
-	// Close the file after it has been copied
 	defer f.Close()
 
-	//finaly, copy the file over
 	if err = client.CopyFile(f, fs.remotePath, fs.remotePathPermission); err != nil {
 		return err
 	}
