@@ -70,8 +70,8 @@ func main() {
 				}
 
 				if event.Op&fsnotify.Write == fsnotify.Write {
-					time.Sleep(10 * time.Second)
 					fileSyncManager.SyncFile(event.Name)
+					time.Sleep(10 * time.Second)
 				}
 			case err, ok := <-watcher.Errors:
 				if !ok {
