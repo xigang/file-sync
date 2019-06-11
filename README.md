@@ -11,6 +11,19 @@ $ go build -o file-sync
 ```
 Move file-sync binary to your `PATH`
 
+## WARN
+
+Need to generate a secret key on the source host and put the public key on the target host before executing the program.
+
+```
+STEP 1:
+#ssh-keygen -t rsa
+
+STEP 2:
+# scp /root/.ssh/id_rsa.pub root@remote_server_adress:/root/.ssh/authorized_keys
+```
+
+
 ## Example
 
 ```
