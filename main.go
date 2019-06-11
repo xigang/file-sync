@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"time"
 
 	"github.com/fsnotify/fsnotify"
 	"github.com/golang/glog"
@@ -69,6 +70,7 @@ func main() {
 				}
 
 				if event.Op&fsnotify.Write == fsnotify.Write {
+					time.Sleep(10 * time.Second)
 					fileSyncManager.SyncFile(event.Name)
 				}
 			case err, ok := <-watcher.Errors:
